@@ -1,7 +1,9 @@
-package ca.ulaval.ima.mecenapp;
+package ca.ulaval.ima.mecenapp.activites;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import ca.ulaval.ima.mecenapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

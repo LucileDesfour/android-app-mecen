@@ -6,9 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.fragments.SearchProject;
+import ca.ulaval.ima.mecenapp.fragments.ShowProject;
 import ca.ulaval.ima.mecenapp.models.Projects;
 import ca.ulaval.ima.mecenapp.models.network.ProjectNetwork;
 
@@ -26,8 +29,13 @@ public class ProjectsActivity extends FragmentActivity implements SearchProject.
         fragmentTransaction.commit();
     }
 
-    public void OnProjectInteractionListener(Uri uri) {
-
+    public void OnProjectInteractionListener(Projects.Project projet) {
+        Log.d("Activity", projet.getName());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ShowProject show_project = new ShowProject();
+        fragmentTransaction.replace(R.id.container, show_project);
+        fragmentTransaction.commit();
     }
 }
 

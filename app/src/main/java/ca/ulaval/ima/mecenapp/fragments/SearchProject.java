@@ -1,12 +1,10 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,23 +50,16 @@ public class SearchProject extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.search_project, container, false);
+        final View view = inflater.inflate(R.layout.fragment_search_project, container, false);
         this.recyclerView = view.findViewById(R.id.recycler_view);
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView.setLayoutManager(this.layoutManager);
-        Log.e("PROJETS", String.valueOf(Projects.project_list));
-        this.mAdapter = new ProjectAdapter(Projects.project_list);
+        this.mAdapter = new ProjectAdapter(Projects.project_list, this.mListener);
         recyclerView.setAdapter(this.mAdapter);
         ProjectNetwork.getProjects(this);
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.OnProjectInteractionListener(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -94,6 +85,6 @@ public class SearchProject extends Fragment {
     }
 
     public interface OnProjectInteractionListener {
-        void OnProjectInteractionListener(Uri uri);
+        void OnProjectInteractionListener(Projects.Project projet);
     }
 }

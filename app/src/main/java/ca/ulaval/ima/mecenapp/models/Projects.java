@@ -8,16 +8,18 @@ import ca.ulaval.ima.mecenapp.models.network.OrgaNetwork;
 public class Projects {
 
     public static ArrayList<Project> project_list = new ArrayList<>();
+    public static Project currentProject = null;
 
     public static class Project {
         private String id;
         private String name;
         private boolean isPulic;
         private Orgas.Orga orga;
-        private String localisation;
         private String description;
+        private ArrayList<String> ressources;
+        private ArrayList<String> domaine;
 
-        public Project(String id_param, String name_params, String isPublic_params, String orgaId, String description_params) {
+        public Project(String id_param, String name_params, String isPublic_params, String orgaId, String description_params, ArrayList<String> ressources_params, ArrayList<String> domains_params) {
             this.id = id_param;
             this.name = name_params;
             if (isPublic_params.equals("true")) {
@@ -28,7 +30,8 @@ public class Projects {
             }
             this.orga = OrgaNetwork.getOrga(orgaId);
             this.description = description_params;
-
+            this.ressources = ressources_params;
+            this.domaine = domains_params;
         }
 
         public String getId() {
@@ -71,14 +74,20 @@ public class Projects {
             this.description = description;
         }
 
-
-
-        public String getLocalisation() {
-            return localisation;
+        public ArrayList<String> getRessources() {
+            return ressources;
         }
 
-        public void setLocalisation(String localisation) {
-            this.localisation = localisation;
+        public void setRessources(ArrayList<String> ressources) {
+            this.ressources = ressources;
+        }
+
+        public ArrayList<String> getDomaine() {
+            return domaine;
+        }
+
+        public void setDomaine(ArrayList<String> domaine) {
+            this.domaine = domaine;
         }
     }
 }

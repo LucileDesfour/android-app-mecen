@@ -34,6 +34,9 @@ public class ProjectsActivity extends FragmentActivity implements SearchProject.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ShowProject show_project = new ShowProject();
+        Bundle bundle = new Bundle();
+        bundle.putString("PROJECT", projet.getId());
+        show_project.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, show_project);
         fragmentTransaction.commit();
     }

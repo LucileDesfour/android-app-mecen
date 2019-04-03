@@ -7,7 +7,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import ca.ulaval.ima.mecenapp.fragments.ShowProject;
 import ca.ulaval.ima.mecenapp.models.Orgas;
+import ca.ulaval.ima.mecenapp.models.Projects;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -15,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class OrgaNetwork {
-    public static Orgas.Orga getOrga(String orgaId) {
+    public static void getOrga(String orgaId, String project_id, ShowProject sproject) {
         final Orgas.Orga[] orga = {null};
         OkHttpClient client = new OkHttpClient();
 
@@ -36,12 +38,15 @@ public class OrgaNetwork {
                 try {
                     JSONObject body = new JSONObject(myResponse);
                     JSONObject o = new JSONObject(body.get("orga").toString());
+                    Log.d("object json :", o.toString());
                     orga[0] = new Orgas.Orga(o.get("name").toString(), o.get("id").toString());
+                    Projects.currentProject.setOrga(orga[0]);
+                    sproject.ChangeData();
+                    Log.d("Orga :", orga[0].getName());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
-        return orga[0];
     }
 }

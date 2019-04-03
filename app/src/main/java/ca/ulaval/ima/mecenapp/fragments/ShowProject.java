@@ -36,25 +36,33 @@ public class ShowProject extends Fragment {
     public static ShowProject newInstance(String projetid) {
         ShowProject fragment = new ShowProject();
         Bundle args = new Bundle();
-        args.putString("PROJET", projetid);
+        args.putString("PROJECT", projetid);
         fragment.setArguments(args);
         return fragment;
     }
 
     public void ChangeData() {
-        TextView name = view.findViewById(R.id.project_name);
-        name.setText(Projects.currentProject.getName());
-        TextView orga = view.findViewById(R.id.project_orga);
-        orga.setText(Projects.currentProject.getOrga().getName());
-        TextView description = view.findViewById(R.id.project_description);
-        description.setText(Projects.currentProject.getDescription());
+        this.projet = Projects.currentProject;
+        this.getActivity().runOnUiThread(new Runnable() {
+             @Override
+             public void run() {
+                 TextView name = view.findViewById(R.id.project_name);
+                 name.setText(Projects.currentProject.getName());
+                 if (Projects.currentProject.getOrga() != null) {
+                     TextView orga = view.findViewById(R.id.project_orga);
+                     orga.setText(Projects.currentProject.getOrga().getName());
+                 }
+                 TextView description = view.findViewById(R.id.project_description);
+                 description.setText(Projects.currentProject.getDescription());
+             }
+         });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            ProjectNetwork.getProject(this, getArguments().getString("PROJET"));
+            ProjectNetwork.getProject(this, getArguments().getString("PROJECT"));
             projet = Projects.currentProject;
         }
 

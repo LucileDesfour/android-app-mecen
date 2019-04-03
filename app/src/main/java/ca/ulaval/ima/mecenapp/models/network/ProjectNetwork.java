@@ -25,6 +25,7 @@ public class ProjectNetwork  {
     static public void getProject(ShowProject sproject, String project_id) {
         OkHttpClient client = new OkHttpClient();
 
+        Log.d("Token :", project_id);
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/projects/" + project_id)
                 .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
@@ -46,29 +47,31 @@ public class ProjectNetwork  {
                     Jobject = new JSONObject(myResponse);
                     JSONObject object = Jobject.getJSONObject("project");
                     JSONObject data = object.getJSONObject("data");
+                    Log.d("Data :", data.toString());
                     ArrayList<String> ressources = new ArrayList<String>();
                     JSONArray jsonArray_resources = data.getJSONArray("resources");
                     if (jsonArray_resources != null) {
-                        int len = jsonArray_resources.length();
-                        for (int i=0; i<len; i++){
-                            ressources.add(jsonArray_resources.get(i).toString());
+                        for (int idx_ressources=0; idx_ressources<jsonArray_resources.length(); idx_ressources++){
+                            ressources.add(jsonArray_resources.get(idx_ressources).toString());
                         }
                     }
+                    Log.d("ressources ", String.valueOf(ressources));
+
                     ArrayList<String> domains = new ArrayList<String>();
                     JSONArray jsonArray_domains = data.getJSONArray("domains");
                     if (jsonArray_domains != null) {
-                        int len = jsonArray_domains.length();
-                        for (int i=0; i<len; i++){
-                            domains.add(jsonArray_domains.get(i).toString());
+                        for (int idx_domains=0; idx_domains<jsonArray_domains.length(); idx_domains++){
+                            domains.add(jsonArray_domains.get(idx_domains).toString());
                         }
                     }
+                    Log.d("domains", String.valueOf(domains));
                     Projects.currentProject = new Projects.Project(object.get("id").toString(),
                                 object.get("title").toString(),
                                 object.get("isPublic").toString(),
-                                object.get("orgaId").toString(),
                                 data.get("description").toString(),
                                 ressources,
                                 domains);
+                    OrgaNetwork.getOrga(object.get("orgaId").toString(), object.get("id").toString(), sproject);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -109,18 +112,17 @@ public class ProjectNetwork  {
                         ArrayList<String> ressources = new ArrayList<String>();
                         JSONArray jsonArray_resources = data.getJSONArray("resources");
                         if (jsonArray_resources != null) {
-                            int len = jsonArray_resources.length();
-                            for (int idx=0; idx<len; idx++){
-                                ressources.add(jsonArray_resources.get(i).toString());
+                            for (int idx_ressources=0; idx_ressources<jsonArray_resources.length(); idx_ressources++){
+                                ressources.add(jsonArray_resources.get(idx_ressources).toString());
                             }
                         }
                         Log.d("ressources ", String.valueOf(ressources));
+
                         ArrayList<String> domains = new ArrayList<String>();
                         JSONArray jsonArray_domains = data.getJSONArray("domains");
                         if (jsonArray_domains != null) {
-                            int len = jsonArray_domains.length();
-                            for (int idx=0; idx<len; idx++){
-                                domains.add(jsonArray_domains.get(i).toString());
+                            for (int idx_domains=0; idx_domains<jsonArray_domains.length(); idx_domains++){
+                                domains.add(jsonArray_domains.get(idx_domains).toString());
                             }
                         }
                         Log.d("domains", String.valueOf(domains));
@@ -128,10 +130,10 @@ public class ProjectNetwork  {
                         Projects.project_list.add(new Projects.Project(object.get("id").toString(),
                                 object.get("title").toString(),
                                 object.get("isPublic").toString(),
-                                object.get("orgaId").toString(),
                                 data.get("description").toString(),
                                 ressources,
                                 domains));
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

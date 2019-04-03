@@ -1,14 +1,20 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import android.app.SearchManager;
+import android.widget.SearchView;
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.adapters.ProjectAdapter;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -45,6 +51,11 @@ public class SearchProject extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setupSearch();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +68,7 @@ public class SearchProject extends Fragment {
         this.mAdapter = new ProjectAdapter(Projects.project_list, this.mListener);
         recyclerView.setAdapter(this.mAdapter);
         ProjectNetwork.getProjects(this);
+
         return view;
     }
 
@@ -77,11 +89,48 @@ public class SearchProject extends Fragment {
         super.onDetach();
         mListener = null;
     }
+    private void setupSearch() {
+        SearchView searchView = getView().findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                processQuery(query);
+                return true;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                processQuery(newText);
+                return false;
+            }
+        });
+
+    }
+
+    private void processQuery(String query) {
+        // in real app you'd have it instantiated just once
+        ArrayList<Projects.Project> result = new ArrayList<>();
+
+        // case insensitive search
+        for (Projects.Project project : Projects.project_list) {
+            if (project.getName().toLowerCase().contains(query.toLowerCase())) {
+                result.add(project);
+                Log.d("Result", project.getName());
+            }
+        }
+        Log.d("Query", query);
+        mAdapter.setItems(result);
+        mAdapter.notifyDataSetChanged();
+    }
     public void ChangeData() {
-        mAdapter.setItems(Projects.project_list);
-        this.getActivity().runOnUiThread(() ->
-                mAdapter.notifyDataSetChanged());
+
+        this.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
     }
 
     public interface OnProjectInteractionListener {

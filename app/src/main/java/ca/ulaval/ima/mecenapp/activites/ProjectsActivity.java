@@ -25,7 +25,7 @@ public class ProjectsActivity extends FragmentActivity implements SearchProject.
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SearchProject fragment_search = new SearchProject();
-        fragmentTransaction.add(R.id.container, fragment_search);
+        fragmentTransaction.add(R.id.container, fragment_search, "SEARCH");
         fragmentTransaction.commit();
     }
 
@@ -37,7 +37,8 @@ public class ProjectsActivity extends FragmentActivity implements SearchProject.
         Bundle bundle = new Bundle();
         bundle.putString("PROJECT", projet.getId());
         show_project.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, show_project);
+        fragmentTransaction.replace(R.id.container, show_project, "PROJECT");
+        fragmentTransaction.addToBackStack("SEARCH");
         fragmentTransaction.commit();
     }
 }

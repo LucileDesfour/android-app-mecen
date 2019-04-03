@@ -4,10 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -43,6 +47,19 @@ public class ShowProject extends Fragment {
 
     public void ChangeData() {
         this.projet = Projects.currentProject;
+        Log.d("Domain size :", String.valueOf(Projects.currentProject.getDomaine().size()));
+        ArrayList<TextView> domains = new ArrayList<>();
+        for (int idx_domains = 0; idx_domains < Projects.currentProject.getDomaine().size(); idx_domains++) {
+            domains.add(new TextView(this.getContext()));
+            domains.get(idx_domains).setText(Projects.currentProject.getDomaine().get(idx_domains));
+        }
+
+        ArrayList<TextView> ressources = new ArrayList<>();
+        for (int idx_ressources = 0; idx_ressources < Projects.currentProject.getRessources().size(); idx_ressources++) {
+            ressources.add(new TextView(this.getContext()));
+            ressources.get(idx_ressources).setText(Projects.currentProject.getRessources().get(idx_ressources));
+        }
+
         this.getActivity().runOnUiThread(new Runnable() {
              @Override
              public void run() {
@@ -54,6 +71,14 @@ public class ShowProject extends Fragment {
                  }
                  TextView description = view.findViewById(R.id.project_description);
                  description.setText(Projects.currentProject.getDescription());
+                 LinearLayout linearLayoutdomain = view.findViewById(R.id.project_domains);
+                 for (int idx_domains = 0; idx_domains < Projects.currentProject.getDomaine().size(); idx_domains++) {
+                     linearLayoutdomain.addView(domains.get(idx_domains));
+                 }
+                 LinearLayout linearLayoutressources = view.findViewById(R.id.project_resources);
+                 for (int idx_ressources = 0; idx_ressources < Projects.currentProject.getRessources().size(); idx_ressources++) {
+                     linearLayoutressources.addView(ressources.get(idx_ressources));
+                 }
              }
          });
     }

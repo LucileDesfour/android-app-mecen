@@ -40,6 +40,7 @@ public class ProjectNetwork  {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
+
                 final String myResponse = response.body().string();
                 Log.d("Reponse", myResponse);
                 JSONObject Jobject = null;
@@ -76,7 +77,7 @@ public class ProjectNetwork  {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                sproject.ChangeData();
+                //sproject.ChangeData();
             }
         });
 
@@ -105,7 +106,7 @@ public class ProjectNetwork  {
                 try {
                     Jobject = new JSONObject(myResponse);
                     JSONArray Jarray = Jobject.getJSONArray("projects");
-
+                    Projects.project_list.clear();
                     for (int i = 0; i < Jarray.length(); i++) {
                         JSONObject object = Jarray.getJSONObject(i);
                         JSONObject data = new JSONObject(object.get("data").toString());

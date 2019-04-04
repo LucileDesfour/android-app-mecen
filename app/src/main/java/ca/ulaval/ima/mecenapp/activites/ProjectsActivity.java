@@ -26,7 +26,6 @@ import android.app.SearchManager;
 import android.widget.SearchView;
 public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener {
 
-    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         setContentView(R.layout.project_activity);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        myToolbar.setLogo(getResources().getDrawable(R.drawable.mcp_name_circle));
         setSupportActionBar(myToolbar);
 
         FragmentManager fragmentManager = getSupportFragmentManager();

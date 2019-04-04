@@ -2,6 +2,8 @@ package ca.ulaval.ima.mecenapp.fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -123,7 +125,8 @@ public class SearchProject extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
     public void ChangeData() {
-
+        Log.d("Projects", String.valueOf(Projects.project_list.size()));
+        mAdapter.setItems(Projects.project_list);
         this.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {

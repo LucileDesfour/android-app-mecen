@@ -1,6 +1,11 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -20,7 +27,6 @@ import ca.ulaval.ima.mecenapp.models.network.ProjectNetwork;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ShowProject.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link ShowProject#newInstance} factory method to
  * create an instance of this fragment.
@@ -72,17 +78,69 @@ public class ShowProject extends Fragment {
                  TextView description = view.findViewById(R.id.project_description);
                  description.setText(Projects.currentProject.getDescription());
                  LinearLayout linearLayoutdomain = view.findViewById(R.id.project_domains);
+                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                         LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                 layoutParams.setMargins(16, 16, 16, 0);
+
+
+                 int idx_color = 0;
+
                  for (int idx_domains = 0; idx_domains < Projects.currentProject.getDomaine().size(); idx_domains++) {
-                     linearLayoutdomain.addView(domains.get(idx_domains));
+
+                     ArrayList<Integer> color = getColor(idx_color);
+                     GradientDrawable gd = new GradientDrawable(
+                             GradientDrawable.Orientation.TOP_BOTTOM,
+                             new int[] {color.get(0), color.get(0), color.get(1)});
+                     gd.setCornerRadius(30);
+                     domains.get(idx_domains).setBackground(gd);
+                     domains.get(idx_domains).setTextColor(Color.WHITE);
+                     domains.get(idx_domains).setPadding(16, 16 , 16,16);
+                     linearLayoutdomain.addView(domains.get(idx_domains), layoutParams);
+                     if (idx_color < 3) {
+                         idx_color++;
+                     } else {
+                         idx_color = 0;
+                     }
                  }
+                 idx_color = 0;
                  LinearLayout linearLayoutressources = view.findViewById(R.id.project_resources);
                  for (int idx_ressources = 0; idx_ressources < Projects.currentProject.getRessources().size(); idx_ressources++) {
-                     linearLayoutressources.addView(ressources.get(idx_ressources));
+                     ArrayList<Integer> color = getColor(idx_color);
+                     GradientDrawable gd = new GradientDrawable(
+                             GradientDrawable.Orientation.TOP_BOTTOM,
+                             new int[] {color.get(0), color.get(0), color.get(1)});
+                     gd.setCornerRadius(30);
+                     ressources.get(idx_ressources).setBackground(gd);
+                     ressources.get(idx_ressources).setTextColor(Color.WHITE);
+                     ressources.get(idx_ressources).setPadding(16, 16 , 16,16);
+                     linearLayoutressources.addView(ressources.get(idx_ressources), layoutParams);
+                     if (idx_color < 3) {
+                         idx_color++;
+                     } else {
+                         idx_color = 0;
+                     }
                  }
              }
          });
     }
 
+    public ArrayList<Integer> getColor(int idx) {
+        ArrayList<Integer> color = new ArrayList<>();
+        if (idx == 0) {
+            color.add(getResources().getColor(R.color.colorAccent));
+            color.add(getResources().getColor(R.color.colorAccentLight));
+        }
+        else if (idx == 1) {
+            color.add(getResources().getColor(R.color.colorPrimary));
+            color.add(getResources().getColor(R.color.colorPrimaryLight));
+        }
+        else  {
+            color.add(getResources().getColor(R.color.secondaryColor));
+            color.add(getResources().getColor(R.color.secondaryColorLight));
+        }
+        return color;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

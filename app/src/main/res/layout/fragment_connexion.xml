@@ -6,12 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient1"
     android:id="@+id/fragmentConnexion"
-    tools:context=".Connexion">
+    tools:context=".activites.Connexion">
 
     <ImageView
         android:id="@+id/idImageViewConnexion"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         android:layout_marginTop="28dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"/>
@@ -46,6 +46,7 @@
         android:inputType="textPassword" />
 
        <Button
+           android:id="@+id/idbuttonLogin"
            android:layout_width="100dp"
            android:layout_height="wrap_content"
            android:layout_below="@+id/idEditTextPassword"

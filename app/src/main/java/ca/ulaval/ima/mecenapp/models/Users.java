@@ -8,6 +8,8 @@ public class Users {
         private String password;
         private String firstName;
         private String lastName;
+        private String imageUrl;
+        private String token;
 
         public String getId() {
             return id;
@@ -47,6 +49,18 @@ public class Users {
 
         public void setLastName(String lastName) {
             this.lastName = lastName;
+        }
+
+        public String getToken() { return token; }
+
+        public void setToken(String token) { this.token = token; }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
     }
 }

@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 
 public interface UserClient {
     @POST("login")
-    Call<Users> login(@Body Login login);
+    Call<Users.User> login(@Body Login login);
     @GET("secretnfos")
     Call<ResponseBody> getSecret(@Header("Authorization") String authToken);
 

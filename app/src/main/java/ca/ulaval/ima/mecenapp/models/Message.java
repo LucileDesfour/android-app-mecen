@@ -39,7 +39,7 @@ public class Message {
         this.user = user;
     }
 
-    public Date getCreatedDate() {
+    public long getCreatedDate() {
         return createdDate;
     }
 

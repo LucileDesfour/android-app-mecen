@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sendbird.android.BaseMessage;
+import com.sendbird.android.SendBird;
+
+import java.util.List;
+
 import ca.ulaval.ima.mecenapp.R;
 
 public class MessageListAdapter extends RecyclerView.Adapter {

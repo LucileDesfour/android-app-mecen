@@ -11,16 +11,14 @@ import okhttp3.internal.Util;
 
 import static android.text.format.DateUtils.formatDateTime;
 
-class ReceivedMessageHolder extends RecyclerView.ViewHolder {
-    TextView messageText, timeText, nameText;
-    ImageView profileImage;
+class SentMessageHolder extends RecyclerView.ViewHolder {
+    TextView messageText, timeText;
 
-    ReceivedMessageHolder(View itemView) {
+    SentMessageHolder(View itemView) {
         super(itemView);
         messageText = (TextView) itemView.findViewById(R.id.text_message_body);
         timeText = (TextView) itemView.findViewById(R.id.text_message_time);
-        nameText = (TextView) itemView.findViewById(R.id.text_message_name);
-        profileImage = (ImageView) itemView.findViewById(R.id.image_message_profile);
+
     }
 
     void bind(Message message) {
@@ -28,9 +26,6 @@ class ReceivedMessageHolder extends RecyclerView.ViewHolder {
 
         // Format the stored timestamp into a readable String using method.
         timeText.setText((CharSequence) message.getCreatedDate());
-        nameText.setText(message.getUser().getEmail());
 
-        // Insert the profile image from the URL into the ImageView.
-        //Utils.displayRoundImageFromUrl(mContext, message.getUser().getImageUrl(), profileImage);
     }
 }

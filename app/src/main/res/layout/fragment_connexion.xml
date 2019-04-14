@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/idImageViewConnexion"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginTop="28dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"/>

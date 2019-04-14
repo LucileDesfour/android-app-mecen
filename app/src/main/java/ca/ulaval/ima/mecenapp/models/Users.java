@@ -2,6 +2,11 @@ package ca.ulaval.ima.mecenapp.models;
 
 public class Users {
 
+
+
+
+
+
     public class User {
         private String id;
         private String email;
@@ -62,5 +67,7 @@ public class Users {
         public void setImageUrl(String imageUrl) {
             this.imageUrl = imageUrl;
         }
+
     }
+
 }

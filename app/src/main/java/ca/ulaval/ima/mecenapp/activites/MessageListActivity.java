@@ -30,7 +30,7 @@ public class MessageListActivity extends AppCompatActivity {
 
         SendBird.init(APP_ID, this);
 
-        SendBird.connect(USER_ID, new SendBird.ConnectHandler() {
+        /*SendBird.connect(USER_ID, new SendBird.ConnectHandler() {
             @Override
             public void onConnected(User user, SendBirdException e) {
 
@@ -71,9 +71,8 @@ public class MessageListActivity extends AppCompatActivity {
                     return;
                 }
             }
-        });
+        });*/
         mMessageRecycler = (RecyclerView) findViewById(R.id.recyclerview_message_list);
-        mMessageAdapter = new MessageListAdapter(this, messageList);
         mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
 }

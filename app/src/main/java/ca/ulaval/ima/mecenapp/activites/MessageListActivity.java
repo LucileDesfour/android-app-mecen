@@ -5,16 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.sendbird.android.BaseChannel;
-import com.sendbird.android.OpenChannel;
-import com.sendbird.android.SendBird;
-import com.sendbird.android.SendBirdException;
-import com.sendbird.android.User;
-import com.sendbird.android.UserMessage;
-
 import ca.ulaval.ima.mecenapp.R;
-import ca.ulaval.ima.mecenapp.models.MessageListAdapter;
-import ca.ulaval.ima.mecenapp.models.Users;
+import ca.ulaval.ima.mecenapp.adapters.MessageListAdapter;
 
 import static android.provider.UserDictionary.Words.APP_ID;
 
@@ -28,7 +20,6 @@ public class MessageListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_list);
 
-        SendBird.init(APP_ID, this);
 
         /*SendBird.connect(USER_ID, new SendBird.ConnectHandler() {
             @Override

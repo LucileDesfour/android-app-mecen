@@ -15,14 +15,14 @@
         app:layout_constraintRight_toRightOf="parent">
     </android.support.v7.widget.RecyclerView>
 
-    <Voir
-        android:layout_width = " 0dp "
-        android:layout_height = " 2dp "
-        android:background = " #dfdfdf "
-        android:layout_marginBottom = " 0dp "
-        app:layout_constraintBottom_toTopOf = " @ + id / layout_chatbox "
-        app:layout_constraintLeft_toLeftOf = " parent "
-        app:layout_constraintRight_toRightOf = " parent " />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dfdfdf"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_chatbox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <LinearLayout
         android:id="@+id/layout_chatbox"
@@ -37,26 +37,26 @@
 
         <EditText
            android:id="@+id/edittext_chatbox"
-            android:hint = " Saisir un message "
-            android:background = " @android: couleur / transparent "
-            android:layout_gravity = "center"
-            android:layout_marginLeft = "16dp"
-            android:layout_marginRight = "16dp"
-            android:layout_width = "0dp"
-            android:layout_weight = "1"
-            android:layout_height = "wrap_content"
-            android:maxLines = "6" />
+            android:hint="Saisir un message"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:maxLines="6"/>
 
-        <Bouton
-            android:id = " @ + id / button_chatbox_send "
-            android:text = "ENVOYER"
-            android:textSize = " 14dp "
-            android:background = " ? attr / selectableItemBackground "
-            android:clickable = " true "
-            android:layout_width = " 64dp "
-            android:layout_height = " 48dp "
-            android:gravité = " centre "
-            android:layout_gravity = " bottom " />
+        <Button
+            android:id="@+id/button_chatbox_send"
+            android:text="ENVOYER"
+            android:textSize="14dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_gravity="bottom"/>
 
 
 

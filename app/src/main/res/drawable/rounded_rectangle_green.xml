@@ -2,12 +2,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape ="rectangle">
 
-    <solide
+    <solid
         android:color ="#4CAF50">
-    </ solid>
+    </solid>
 
 
-    <coins
+    <corners
         android:radius="20dp">
-    </ corners>
+    </corners>
 </shape>

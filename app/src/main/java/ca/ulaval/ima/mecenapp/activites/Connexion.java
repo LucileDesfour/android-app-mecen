@@ -12,24 +12,18 @@ import android.widget.Toast;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.models.Login;
-import ca.ulaval.ima.mecenapp.models.Service.UserClient;
 import ca.ulaval.ima.mecenapp.models.Users;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Connexion extends Fragment {
-    Retrofit.Builder builder=new Retrofit.Builder()
+    /*Retrofit.Builder builder=new Retrofit.Builder()
             .baseUrl("https://mecenapp-api-dev.herokuapp.com/api/auth/sign-in")
             .addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit=builder.build();
-    UserClient userClient= retrofit.create(UserClient.class);
+    UserClient userClient= retrofit.create(UserClient.class);*/
     Button buttonLogin;
     TextView textViewUsername, textViewpassword;
 
@@ -58,8 +52,9 @@ public class Connexion extends Fragment {
     private static String token;
 
     private void login(){
-        Login login=new Login("mecenapp@gmail.com","ulaval2019");
-        Call<Users.User> call=userClient.login(login);
+        Login login=new Login("mecenapp@gmail.com","ulaval2019"); // Recuperer celles de l'UI
+        // Faire le call dans une fonction dans UserNetwork
+        /*Call<Users.User> call=userClient.login(login);
 
         call.enqueue(new Callback<Users.User>() {
             @Override
@@ -84,7 +79,7 @@ public class Connexion extends Fragment {
                 Toast.makeText(getContext(),"error :(", Toast.LENGTH_SHORT).show();
 
             }
-        });
+        });*/
 
     }
 

@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">MecenApp</string>
-
+    <string name="noString">Banana</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="creer_une_conversation">Créer une Conversation</string>
+    <string name="ajouter_des_membres">Ajouter des membres</string>
+    <string name="selection_des_membres">Sélection des membres :</string>
+    <string name="selectiones">Sélectionés</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="selection_de_lorganisation">Sélection de l\'organisation :</string>
 </resources>

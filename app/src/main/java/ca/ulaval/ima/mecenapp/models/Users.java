@@ -1,13 +1,31 @@
 package ca.ulaval.ima.mecenapp.models;
 
-public class Users {
+import java.util.ArrayList;
 
-    public class User {
+public class Users {
+    public static ArrayList<User> users_list = new ArrayList<>();
+
+    public static class User {
         private String id;
         private String email;
         private String password;
         private String firstName;
         private String lastName;
+
+        public User(String id, String email, String password, String firstName, String lastName) {
+            this.id = id;
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public User(String id, String email, String firstName, String lastName) {
+            this.id = id;
+            this.email = email;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
 
         public String getId() {
             return id;

@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activites.ChatActivity">
+        </activity>
+        <activity android:name=".activites.ProjectsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

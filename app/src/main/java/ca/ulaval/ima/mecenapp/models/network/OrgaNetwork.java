@@ -54,6 +54,7 @@ public class OrgaNetwork {
     }
 
     public static void getOrgas(CreateChatRoom createChatRoom) {
+        Orgas.orgas_list.clear();
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -69,7 +70,8 @@ public class OrgaNetwork {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String myReponse = response.body().toString();
+                assert response.body() != null;
+                final String myReponse = response.body().string();
                 Orgas.orgas_names.clear();
                 Orgas.orgas_list.clear();
                 try {
@@ -90,11 +92,11 @@ public class OrgaNetwork {
         });
     }
 
-    public void getOrgaMembers(String orgaId, CreateChatRoom createChatRoom){
+    public static void getOrgaMembers(String orgaId, CreateChatRoom createChatRoom){
         Users.users_list.clear();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://mecenapp-api-dev.herokuapp.com/api/orgas/"+orgaId+"/menbers")
+                .url("https://mecenapp-api-dev.herokuapp.com/api/orgas/"+orgaId+"/members")
                 .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
                 .build();
         client.newCall(request).enqueue(new Callback() {
@@ -106,10 +108,11 @@ public class OrgaNetwork {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String myReponse = response.body().toString();
+                assert response.body() != null;
+                String myReponse = response.body().string();
                 try {
                     JSONObject body = new JSONObject(myReponse);
-                    JSONArray jMembers = body.getJSONArray("orga");
+                    JSONArray jMembers = body.getJSONArray("members");
                     for(int i = 0; i < jMembers.length(); i++){
                         JSONObject jmember = jMembers.getJSONObject(i);
                         JSONObject jprofile =jmember.getJSONObject("profile");
@@ -120,7 +123,7 @@ public class OrgaNetwork {
                                 jprofile.getString("lastName")
                         ));
                     }
-
+                    createChatRoom.updateSelection();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

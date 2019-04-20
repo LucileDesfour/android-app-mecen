@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -69,6 +70,15 @@ public class SearchProject extends Fragment {
         this.recyclerView.setLayoutManager(this.layoutManager);
         this.mAdapter = new ProjectAdapter(Projects.project_list, this.mListener);
         recyclerView.setAdapter(this.mAdapter);
+
+        FloatingActionButton fab = view.findViewById(R.id.floatingActionButton2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.StartChatActivity();
+            }
+        });
+
         ProjectNetwork.getProjects(this);
 
         return view;
@@ -138,5 +148,6 @@ public class SearchProject extends Fragment {
 
     public interface OnProjectInteractionListener {
         void OnProjectInteractionListener(Projects.Project projet);
+        void StartChatActivity();
     }
 }

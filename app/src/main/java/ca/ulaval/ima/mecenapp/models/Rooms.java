@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Rooms {
     public static ArrayList<Room> rooms = new ArrayList<>();
-    public Room current_room = null;
+    public static Room current_room = null;
 
     public Rooms() {
-        this.rooms = new ArrayList<>();
+        rooms = new ArrayList<>();
     }
 
 

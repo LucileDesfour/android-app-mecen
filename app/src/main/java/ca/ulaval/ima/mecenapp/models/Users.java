@@ -3,11 +3,9 @@ package ca.ulaval.ima.mecenapp.models;
 public class Users {
 
 
+    public static User currentUser;
 
-
-
-
-    public class User {
+    public static class User {
         private String id;
         private String email;
         private String password;
@@ -15,6 +13,10 @@ public class Users {
         private String lastName;
         private String imageUrl;
         private String token;
+
+        public User(String token) {
+            this.token = token;
+        }
 
         public String getId() {
             return id;

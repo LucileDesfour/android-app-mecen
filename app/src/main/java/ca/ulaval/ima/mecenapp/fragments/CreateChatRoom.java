@@ -116,6 +116,7 @@ public class CreateChatRoom extends Fragment {
 
     public interface CreateRoomsListener{
         void onCreateRoom(ArrayList<Users.User> users, CreateChatRoom createChatRoom);
+        void startChatRooms();
     }
 
     public void setupSpinnerAdapter(){
@@ -189,8 +190,8 @@ public class CreateChatRoom extends Fragment {
     }
 
     public void onCreatedRoom(){
-        //do something (go backs to the list or open the new room)
-        //for now his just update the UI
+        mListener.startChatRooms();
+        /*
         this.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -199,7 +200,7 @@ public class CreateChatRoom extends Fragment {
                 submitBtn.setTextColor(Color.parseColor("#FFFFFF"));
                 submitBtn.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.create_room_button));
             }
-        });
+        });*/
     }
 
 

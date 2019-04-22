@@ -33,8 +33,9 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
 
     @Override
     public void onItemSelect() {
-        //launche the chat fragment
+        //launch chat fragment
     }
+
 
     @Override
     public void onBeginCreateRoom() {
@@ -49,5 +50,14 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
     @Override
     public void onCreateRoom(ArrayList<Users.User> users, CreateChatRoom createChatRoom) {
         RoomsNetwork.postRooms(users, createChatRoom);
+    }
+
+    @Override
+    public void startChatRooms() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ChatRooms fragment_chatRooms = new ChatRooms();
+        fragmentTransaction.replace(R.id.container, fragment_chatRooms, "CHATROOMS");
+        fragmentTransaction.commit();
     }
 }

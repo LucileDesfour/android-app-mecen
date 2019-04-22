@@ -4,8 +4,6 @@ import ca.ulaval.ima.mecenapp.fragments.CreateChatRoom;
 import ca.ulaval.ima.mecenapp.models.Rooms;
 import ca.ulaval.ima.mecenapp.models.Users;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,7 +76,7 @@ public class RoomsNetwork {
                                 manager,
                                 "noName"));
                     }
-                    chatRooms.UpdateAdapter();
+                    chatRooms.updateAdapter();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +88,7 @@ public class RoomsNetwork {
     static public void postRooms(ArrayList<Users.User> users,CreateChatRoom createChatRoom){
         OkHttpClient client = new OkHttpClient();
 
-        Log.d("TEST",String.valueOf(users.size()));
+        
 
         RequestBody body = RequestBody.create(null, new byte[0]);
 
@@ -114,7 +112,7 @@ public class RoomsNetwork {
                     res = new JSONObject(myResponse);
                     JSONObject jroom = res.getJSONObject("room");
                     inProcessRoomId = jroom.getString("id");
-                    Log.d("TEST", inProcessRoomId);
+                    
                     if (users.size() == 0){
                         createChatRoom.onCreatedRoom();
                     } else {
@@ -131,8 +129,8 @@ public class RoomsNetwork {
         OkHttpClient client = new OkHttpClient();
 
         String jmemberId = "{\"userId\": \""+members.get(index).getId()+"\"}";
-        Log.d("TEST",jmemberId);
-        Log.d("TEST",BASE_URL + "chat/rooms/"+roomId+"/members");
+        
+        
         RequestBody body = RequestBody.create(JSON,jmemberId);
 
         Request request = new Request.Builder()
@@ -149,7 +147,7 @@ public class RoomsNetwork {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
-                Log.d("TEST",response.body().string());
+                
                 if (index == members.size()-1) {
                     createChatRoom.onCreatedRoom();
                 } else {

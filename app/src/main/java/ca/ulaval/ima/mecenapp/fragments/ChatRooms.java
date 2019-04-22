@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,9 +73,11 @@ public class ChatRooms extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Rooms.rooms.clear();
+        updateAdapter();
     }
 
-    public void UpdateAdapter(){
+    public void updateAdapter(){
         mAdapter.setItems(Rooms.rooms);
         String newTitle = getContext().getString(R.string.my_chats) + " ["+ Rooms.rooms.size() +"]";
         this.getActivity().runOnUiThread(new Runnable() {

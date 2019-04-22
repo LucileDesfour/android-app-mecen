@@ -41,11 +41,11 @@ public class OrgaNetwork {
                 try {
                     JSONObject body = new JSONObject(myResponse);
                     JSONObject o = new JSONObject(body.get("orga").toString());
-                    Log.d("object json :", o.toString());
+                    
                     orga[0] = new Orgas.Orga(o.get("name").toString(), o.get("id").toString());
                     Projects.currentProject.setOrga(orga[0]);
                     sproject.ChangeData();
-                    Log.d("Orga :", orga[0].getName());
+                    
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

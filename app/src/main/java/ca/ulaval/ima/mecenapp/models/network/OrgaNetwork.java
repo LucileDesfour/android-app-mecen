@@ -55,6 +55,7 @@ public class OrgaNetwork {
 
     public static void getOrgas(CreateChatRoom createChatRoom) {
         Orgas.orgas_list.clear();
+        Orgas.orgas_names.clear();
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()

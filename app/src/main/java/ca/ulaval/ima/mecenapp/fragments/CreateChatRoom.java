@@ -107,6 +107,9 @@ public class CreateChatRoom extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Orgas.orgas_list.clear();
+        Orgas.orgas_names.clear();
+        setupSpinnerAdapter();
     }
 
     public interface CreateRoomsListener{
@@ -169,4 +172,6 @@ public class CreateChatRoom extends Fragment {
     public void runGetMembers(int i){
         OrgaNetwork.getOrgaMembers(Orgas.orgas_list.get(i).getId(),this);
     }
+
+
 }

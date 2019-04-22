@@ -66,5 +66,9 @@ public class Users {
         public void setLastName(String lastName) {
             this.lastName = lastName;
         }
+
+        public String getUserInitial(){
+            return firstName.substring(0,1).toUpperCase() + "." + lastName;
+        }
     }
 }

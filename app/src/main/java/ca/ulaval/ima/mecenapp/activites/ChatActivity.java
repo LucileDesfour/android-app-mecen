@@ -47,7 +47,7 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
     }
 
     @Override
-    public void onCreateRoom(ArrayList<Users.User> users) {
-        RoomsNetwork.postRooms(users);
+    public void onCreateRoom(ArrayList<Users.User> users, CreateChatRoom createChatRoom) {
+        RoomsNetwork.postRooms(users, createChatRoom);
     }
 }

@@ -1,11 +1,12 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class CreateChatRoom extends Fragment {
     private RecyclerView.LayoutManager selectedLayoutManager;
     private ArrayAdapter<String> orgaArrayAdapter;
     private Spinner orgaSpinner;
+    private Button submitBtn;
 
     private TextView selectOrga;
     private TextView selectionMembers;
@@ -46,14 +48,14 @@ public class CreateChatRoom extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         final View v = inflater.inflate(R.layout.fragment_create_chat_room, container, false);
-        Button submitBtn = v.findViewById(R.id.submit_button);
+        submitBtn = v.findViewById(R.id.submit_button);
         selectOrga = v.findViewById(R.id.select_orga);
         selectionMembers = v.findViewById(R.id.selection_members);
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onCreateRoom(selectedAdapter.getItems());
+                createRoom();
             }
         });
 
@@ -113,7 +115,7 @@ public class CreateChatRoom extends Fragment {
     }
 
     public interface CreateRoomsListener{
-        void onCreateRoom(ArrayList<Users.User> users);
+        void onCreateRoom(ArrayList<Users.User> users, CreateChatRoom createChatRoom);
     }
 
     public void setupSpinnerAdapter(){
@@ -141,7 +143,7 @@ public class CreateChatRoom extends Fragment {
 
     public void clearSelection(){
         Users.users_list.clear();
-        selectedAdapter.setItems(Users.users_list);
+        selectionAdapter.setItems(Users.users_list);
         this.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -171,6 +173,33 @@ public class CreateChatRoom extends Fragment {
 
     public void runGetMembers(int i){
         OrgaNetwork.getOrgaMembers(Orgas.orgas_list.get(i).getId(),this);
+    }
+
+    public void createRoom(){
+        mListener.onCreateRoom(selectedAdapter.getItems(), this);
+        this.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                submitBtn.setEnabled(false);
+                submitBtn.setText(R.string.creation);
+                submitBtn.setTextColor(Color.parseColor("#000000"));
+                submitBtn.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.gradient_grey_border_item));
+            }
+        });
+    }
+
+    public void onCreatedRoom(){
+        //do something (go backs to the list or open the new room)
+        //for now his just update the UI
+        this.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                submitBtn.setEnabled(true);
+                submitBtn.setText(R.string.create_room);
+                submitBtn.setTextColor(Color.parseColor("#FFFFFF"));
+                submitBtn.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.create_room_button));
+            }
+        });
     }
 
 

@@ -63,5 +63,18 @@ public class Rooms {
         public void setName(String name) {
             this.name = name;
         }
+
+        public String getMembersinitial(){
+            if (members.size() == 0){
+                return manager.getUserInitial();
+            } else {
+                String membersInitials = "";
+                for (int i=1;i<members.size();i++){
+                    membersInitials = membersInitials.concat(members.get(i).getUserInitial());
+                    if (i != members.size()-1) membersInitials = membersInitials.concat(",");
+                }
+                return membersInitials;
+            }
+        }
     }
 }

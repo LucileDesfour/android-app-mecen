@@ -1,5 +1,6 @@
 package ca.ulaval.ima.mecenapp.models.network;
 import ca.ulaval.ima.mecenapp.fragments.ChatRooms;
+import ca.ulaval.ima.mecenapp.fragments.CreateChatRoom;
 import ca.ulaval.ima.mecenapp.models.Rooms;
 import ca.ulaval.ima.mecenapp.models.Users;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -87,8 +87,10 @@ public class RoomsNetwork {
 
     }
 
-    static public void postRooms(ArrayList<Users.User> users){
+    static public void postRooms(ArrayList<Users.User> users,CreateChatRoom createChatRoom){
         OkHttpClient client = new OkHttpClient();
+
+        Log.d("TEST",String.valueOf(users.size()));
 
         RequestBody body = RequestBody.create(null, new byte[0]);
 
@@ -112,9 +114,11 @@ public class RoomsNetwork {
                     res = new JSONObject(myResponse);
                     JSONObject jroom = res.getJSONObject("room");
                     inProcessRoomId = jroom.getString("id");
-                    Log.d("room", inProcessRoomId);
-                    for (int i = 0; i<users.size();i++){
-                        postMembers(inProcessRoomId,users.get(i).getId());
+                    Log.d("TEST", inProcessRoomId);
+                    if (users.size() == 0){
+                        createChatRoom.onCreatedRoom();
+                    } else {
+                        postMembers(inProcessRoomId, users, createChatRoom, 0);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -123,10 +127,12 @@ public class RoomsNetwork {
         });
     }
 
-    static public void postMembers(String roomId,String memberId){
+    static public void postMembers(String roomId, ArrayList<Users.User> members, CreateChatRoom createChatRoom,int index){
         OkHttpClient client = new OkHttpClient();
 
-        String jmemberId = "{\"userId\": \""+memberId+"\"}";
+        String jmemberId = "{\"userId\": \""+members.get(index).getId()+"\"}";
+        Log.d("TEST",jmemberId);
+        Log.d("TEST",BASE_URL + "chat/rooms/"+roomId+"/members");
         RequestBody body = RequestBody.create(JSON,jmemberId);
 
         Request request = new Request.Builder()
@@ -143,6 +149,12 @@ public class RoomsNetwork {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 assert response.body() != null;
+                Log.d("TEST",response.body().string());
+                if (index == members.size()-1) {
+                    createChatRoom.onCreatedRoom();
+                } else {
+                    postMembers(roomId,members,createChatRoom,index+1);
+                }
             }
         });
     }

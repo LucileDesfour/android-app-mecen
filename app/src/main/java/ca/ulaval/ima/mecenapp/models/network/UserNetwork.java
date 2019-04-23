@@ -56,7 +56,7 @@ public class UserNetwork {
                         Users.currentUser=new Users.User(token);
                         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(("token"), token);
+                        editor.putString("token", token);
                         editor.commit();
 
                     } catch (JSONException e) {

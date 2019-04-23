@@ -1,6 +1,9 @@
 package ca.ulaval.ima.mecenapp.activites;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,11 +22,6 @@ import ca.ulaval.ima.mecenapp.models.Users;
  * A simple {@link Fragment} subclass.
  */
 public class Connexion extends Fragment {
-    /*Retrofit.Builder builder=new Retrofit.Builder()
-            .baseUrl("https://mecenapp-api-dev.herokuapp.com/api/auth/sign-in")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit=builder.build();
-    UserClient userClient= retrofit.create(UserClient.class);*/
     Button buttonLogin;
     TextView textViewUsername, textViewpassword;
 
@@ -52,8 +50,12 @@ public class Connexion extends Fragment {
     private static String token;
 
     private void login(){
-        Login login=new Login("mecenapp@gmail.com","ulaval2019"); // Recuperer celles de l'UI
+        //Login login=new Login("mecenapp@gmail.com","ulaval2019"); // Recuperer celles de l'UI
         // Faire le call dans une fonction dans UserNetwork
+        Activity activity=null;
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        String token = null;
+        token=sharedPref.getString("token", token);
         /*Call<Users.User> call=userClient.login(login);
 
         call.enqueue(new Callback<Users.User>() {

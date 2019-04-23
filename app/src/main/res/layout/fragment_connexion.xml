@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient1"
     android:id="@+id/fragmentConnexion"
-    tools:context=".activites.Connexion">
+    tools:context=".fragments.Connexion">
 
     <ImageView
         android:id="@+id/idImageViewConnexion"
@@ -31,7 +31,7 @@
 
 
     <EditText
-        android:id="@+id/idEditTextPassword"
+        android:id="@+id/edit_text_password"
         android:layout_width="199dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idEditTexteUserName"
@@ -49,7 +49,7 @@
            android:id="@+id/idbuttonLogin"
            android:layout_width="100dp"
            android:layout_height="wrap_content"
-           android:layout_below="@+id/idEditTextPassword"
+           android:layout_below="@+id/edit_text_password"
            android:layout_centerHorizontal="true"
            android:background="@color/colorPrimaryDark"
            android:layout_marginTop="20dp"

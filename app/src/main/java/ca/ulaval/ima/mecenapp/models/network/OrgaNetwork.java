@@ -1,5 +1,6 @@
 package ca.ulaval.ima.mecenapp.models.network;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -23,7 +24,7 @@ public class OrgaNetwork {
 
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/orgas/" + orgaId)
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", sproject.getActivity().getPreferences(Context.MODE_PRIVATE).getString("token", null))
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -38,11 +39,9 @@ public class OrgaNetwork {
                 try {
                     JSONObject body = new JSONObject(myResponse);
                     JSONObject o = new JSONObject(body.get("orga").toString());
-                    Log.d("object json :", o.toString());
                     orga[0] = new Orgas.Orga(o.get("name").toString(), o.get("id").toString());
                     Projects.currentProject.setOrga(orga[0]);
                     sproject.ChangeData();
-                    Log.d("Orga :", orga[0].getName());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

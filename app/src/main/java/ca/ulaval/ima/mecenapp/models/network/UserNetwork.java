@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import ca.ulaval.ima.mecenapp.R;
+import ca.ulaval.ima.mecenapp.fragments.Login;
 import ca.ulaval.ima.mecenapp.models.Users;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -22,7 +23,7 @@ import okhttp3.Response;
 public class UserNetwork {
 
 
-    public static void getToken(String email, String password, FragmentActivity activity){
+    public static void getToken(String email, String password, FragmentActivity activity, Login login){
         OkHttpClient client=new OkHttpClient();
 
 
@@ -58,7 +59,7 @@ public class UserNetwork {
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("token", token);
                         editor.commit();
-
+                        login.closeFragment();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

@@ -56,32 +56,6 @@ public class Connexion extends Fragment {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         String token = null;
         token=sharedPref.getString("token", token);
-        /*Call<Users.User> call=userClient.login(login);
-
-        call.enqueue(new Callback<Users.User>() {
-            @Override
-            public void onResponse(Call<Users.User> call, Response<Users.User> response) {
-
-                if (response.isSuccessful()){
-
-                    Toast.makeText(getContext(), response.body().getToken(), Toast.LENGTH_SHORT).show();
-
-                    //On recupere le token
-                    token=response.body().getToken();
-
-                }else{
-
-                    Toast.makeText(getContext(),"not correct :(", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Users.User> call, Throwable t) {
-                Toast.makeText(getContext(),"error :(", Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
 
     }
 

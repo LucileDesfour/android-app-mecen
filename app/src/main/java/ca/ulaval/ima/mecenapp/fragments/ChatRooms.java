@@ -41,7 +41,7 @@ public class ChatRooms extends Fragment {
         newRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onBeginCreateRoom();
+                mListener.startCreateChatRoom();
             }
         });
 
@@ -79,7 +79,7 @@ public class ChatRooms extends Fragment {
 
     public void updateAdapter(){
         mAdapter.setItems(Rooms.rooms);
-        String newTitle = getContext().getString(R.string.my_chats) + " ["+ Rooms.rooms.size() +"]";
+        String newTitle = getResources().getString(R.string.my_chats) + " ["+ Rooms.rooms.size() +"]";
         this.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -91,7 +91,7 @@ public class ChatRooms extends Fragment {
 
     public interface ChatRoomsListener {
         void onItemSelect();
-        void onBeginCreateRoom();
+        void startCreateChatRoom();
     }
 
 

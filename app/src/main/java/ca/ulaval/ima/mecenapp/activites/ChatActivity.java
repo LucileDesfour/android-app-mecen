@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.fragments.ChatRooms;
 import ca.ulaval.ima.mecenapp.fragments.CreateChatRoom;
+import ca.ulaval.ima.mecenapp.models.Orgas;
 import ca.ulaval.ima.mecenapp.models.Users;
 import ca.ulaval.ima.mecenapp.models.network.RoomsNetwork;
 
@@ -38,7 +39,9 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
 
 
     @Override
-    public void onBeginCreateRoom() {
+    public void startCreateChatRoom() {
+        Orgas.orgas_list.clear();
+        Orgas.orgas_names.clear();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         CreateChatRoom fragment_createChatRoom = new CreateChatRoom();
@@ -50,14 +53,5 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
     @Override
     public void onCreateRoom(ArrayList<Users.User> users, CreateChatRoom createChatRoom) {
         RoomsNetwork.postRooms(users, createChatRoom);
-    }
-
-    @Override
-    public void startChatRooms() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ChatRooms fragment_chatRooms = new ChatRooms();
-        fragmentTransaction.replace(R.id.container, fragment_chatRooms, "CHATROOMS");
-        fragmentTransaction.commit();
     }
 }

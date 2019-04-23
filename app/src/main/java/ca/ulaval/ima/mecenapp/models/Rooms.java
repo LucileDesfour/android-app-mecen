@@ -64,8 +64,8 @@ public class Rooms {
             this.name = name;
         }
 
-        public String getMembersinitial(){
-            if (members.size() == 0){
+        public String getMembersInitials(){
+            if (members.size() == 1){
                 return manager.getUserInitial();
             } else {
                 String membersInitials = "";

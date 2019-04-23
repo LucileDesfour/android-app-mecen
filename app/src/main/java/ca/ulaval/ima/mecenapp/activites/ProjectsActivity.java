@@ -2,6 +2,7 @@ package ca.ulaval.ima.mecenapp.activites;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -54,6 +55,12 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         fragmentTransaction.replace(R.id.container, show_project, "PROJECT");
         fragmentTransaction.addToBackStack("SEARCH");
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void StartChatActivity() {
+        Intent intent = new Intent(ProjectsActivity.this,ChatActivity.class);
+        startActivity(intent);
     }
 
 }

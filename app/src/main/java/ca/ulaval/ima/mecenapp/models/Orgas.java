@@ -1,6 +1,10 @@
 package ca.ulaval.ima.mecenapp.models;
 
+import java.util.ArrayList;
+
 public class Orgas {
+    public static ArrayList<Orga> orgas_list = new ArrayList<>();
+    public static ArrayList<String> orgas_names = new ArrayList<>();
 
     public static class Orga {
 

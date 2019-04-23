@@ -26,7 +26,7 @@ import ca.ulaval.ima.mecenapp.models.Projects;
 import ca.ulaval.ima.mecenapp.models.network.ProjectNetwork;
 import android.app.SearchManager;
 import android.widget.SearchView;
-public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener {
+public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener, Login.OnLoginInteractionListener {
 
 
     @Override
@@ -66,5 +66,13 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         fragmentTransaction.commit();
     }
 
+    @Override
+    public void OnLoginInteractionListener() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        SearchProject fragment_search = new SearchProject();
+        fragmentTransaction.replace(R.id.container, fragment_search, "SEARCH");
+        fragmentTransaction.commit();
+    }
 }
 

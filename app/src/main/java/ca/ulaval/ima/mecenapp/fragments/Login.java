@@ -1,6 +1,7 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import ca.ulaval.ima.mecenapp.R;
+import ca.ulaval.ima.mecenapp.models.Projects;
 import ca.ulaval.ima.mecenapp.models.network.UserNetwork;
 
 
@@ -21,7 +23,7 @@ public class Login extends Fragment {
     ImageView imageViewLogin;
     EditText editTextEmail, editTextPassword;
     Button buttonLogin;
-
+    OnLoginInteractionListener mListener;
 
     public Login() {
         // Required empty public constructor
@@ -38,10 +40,11 @@ public class Login extends Fragment {
         editTextPassword=(EditText) view.findViewById(R.id.edit_text_password);
         buttonLogin=(Button) view.findViewById(R.id.button_login);
 
+        Login login = this;
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserNetwork.getToken(editTextEmail.getText().toString(),editTextPassword.getText().toString(), getActivity());
+                UserNetwork.getToken(editTextEmail.getText().toString(),editTextPassword.getText().toString(), getActivity(), login);
 
             }
         });
@@ -49,5 +52,22 @@ public class Login extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnLoginInteractionListener) {
+            mListener = (OnLoginInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnProjectInteractionListener");
+        }
+    }
+    public void closeFragment() {
+        mListener.OnLoginInteractionListener();
+    }
+
+    public interface OnLoginInteractionListener {
+        void OnLoginInteractionListener();
+    }
 
 }

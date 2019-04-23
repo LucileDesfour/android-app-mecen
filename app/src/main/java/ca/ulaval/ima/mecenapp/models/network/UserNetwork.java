@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import ca.ulaval.ima.mecenapp.R;
+import ca.ulaval.ima.mecenapp.models.Login;
 import ca.ulaval.ima.mecenapp.models.Users;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,7 +59,7 @@ public class UserNetwork {
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString(("token"), token);
                         editor.commit();
-
+                        activity.finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

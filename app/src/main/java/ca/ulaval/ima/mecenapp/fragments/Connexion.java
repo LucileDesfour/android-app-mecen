@@ -1,4 +1,4 @@
-package ca.ulaval.ima.mecenapp.activites;
+package ca.ulaval.ima.mecenapp.fragments;
 
 
 import android.os.Bundle;

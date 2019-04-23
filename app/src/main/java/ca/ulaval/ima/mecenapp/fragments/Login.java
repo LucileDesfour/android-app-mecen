@@ -1,4 +1,4 @@
-package ca.ulaval.ima.mecenapp.models;
+package ca.ulaval.ima.mecenapp.fragments;
 
 
 import android.os.Bundle;
@@ -17,13 +17,13 @@ import ca.ulaval.ima.mecenapp.models.network.UserNetwork;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_login extends Fragment {
+public class Login extends Fragment {
     ImageView imageViewLogin;
     EditText editTextEmail, editTextPassword;
     Button buttonLogin;
 
 
-    public fragment_login() {
+    public Login() {
         // Required empty public constructor
     }
 
@@ -32,20 +32,22 @@ public class fragment_login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_fragment_login, container, false);
+        View view=inflater.inflate(R.layout.fragment_login, container, false);
 
-        imageViewLogin=(ImageView) view.findViewById(R.id.idImageViewLogin);
-        editTextEmail=(EditText) view.findViewById(R.id.idEditTexteEmail);
-        editTextPassword=(EditText) view.findViewById(R.id.idEditTextPassword);
+        editTextEmail=(EditText) view.findViewById(R.id.edit_text_email);
+        editTextPassword=(EditText) view.findViewById(R.id.edit_text_password);
+        buttonLogin=(Button) view.findViewById(R.id.button_login);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserNetwork.getToken(editTextEmail.getText().toString(),editTextPassword.getText().toString(), getActivity());
+
             }
         });
 
         return view;
     }
+
 
 }

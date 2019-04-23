@@ -1,6 +1,7 @@
 package ca.ulaval.ima.mecenapp.models.network;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -26,9 +27,10 @@ public class ProjectNetwork  {
         OkHttpClient client = new OkHttpClient();
 
         Log.d("Token :", project_id);
+
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/projects/" + project_id)
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", sproject.getActivity().getPreferences(Context.MODE_PRIVATE).getString("token", null))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
@@ -88,7 +90,7 @@ public class ProjectNetwork  {
 
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/projects")
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", sproject.getActivity().getPreferences(Context.MODE_PRIVATE).getString("token", null))
                 .build();
 
         client.newCall(request).enqueue(new Callback() {

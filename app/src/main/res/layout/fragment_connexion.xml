@@ -11,8 +11,8 @@
     <ImageView
         android:id="@+id/idImageViewConnexion"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_marginTop="28dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"/>
 
@@ -20,6 +20,8 @@
         android:id="@+id/idEditTexteUserName"
         android:layout_width="200dp"
         android:layout_height="40dp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/bordereditext"
         android:drawableLeft="@drawable/ic_action_username"
         android:layout_below="@+id/idImageViewConnexion"
         android:layout_centerHorizontal="true"
@@ -27,22 +29,26 @@
         android:ems="20"
         android:inputType="textEmailAddress"
         android:textSize="16dp"
+        android:textColorHint="@color/colorAccent"
         android:hint="username"/>
 
 
     <EditText
         android:id="@+id/edit_text_password"
-        android:layout_width="199dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/idEditTexteUserName"
         android:layout_alignStart="@+id/idEditTexteUserName"
         android:layout_alignLeft="@+id/idEditTexteUserName"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/colorAccent"
+        android:background="@drawable/bordereditext"
         android:drawableLeft="@drawable/ic_action_password"
         android:ems="10"
         android:hint="Password"
+        android:textColorHint="@color/colorAccent"
         android:inputType="textPassword" />
 
        <Button
@@ -51,8 +57,9 @@
            android:layout_height="wrap_content"
            android:layout_below="@+id/edit_text_password"
            android:layout_centerHorizontal="true"
-           android:background="@color/colorPrimaryDark"
+           android:background="@drawable/border"
            android:layout_marginTop="20dp"
+           android:textColor="@color/cardview_light_background"
            android:text="login"/>
 
 

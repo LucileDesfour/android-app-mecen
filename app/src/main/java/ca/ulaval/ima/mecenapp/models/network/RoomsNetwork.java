@@ -1,4 +1,6 @@
 package ca.ulaval.ima.mecenapp.models.network;
+import android.content.Context;
+
 import ca.ulaval.ima.mecenapp.fragments.ChatRooms;
 import ca.ulaval.ima.mecenapp.fragments.CreateChatRoom;
 import ca.ulaval.ima.mecenapp.models.Rooms;
@@ -23,7 +25,6 @@ public class RoomsNetwork {
     private static final String BASE_URL ="https://mecenapp-chat-dev.herokuapp.com/";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    private static final String token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NWQ1ODMwOC0zY2E1LTQ4MTQtOThlMC00OWE0MzFjZDFiMDEiLCJpYXQiOjE1NTUxOTg4MjgsImV4cCI6MTU1NTI4NTIyOH0.GUBMMpNwWN7N3TwUo-N_L69n75DVMoSjYa0feGPLh2o";
 
     private static String inProcessRoomId;
 
@@ -32,7 +33,7 @@ public class RoomsNetwork {
         Rooms.rooms.clear();
         Request request = new Request.Builder()
                 .url( BASE_URL + "chat/rooms/" )
-                .header("token", token)
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -95,7 +96,7 @@ public class RoomsNetwork {
         Request request = new Request.Builder()
                 .url( BASE_URL + "chat/rooms" )
                 .method("POST",body)
-                .header("token", token)
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -136,7 +137,7 @@ public class RoomsNetwork {
         Request request = new Request.Builder()
                 .url( BASE_URL + "chat/rooms/"+roomId+"/members" )
                 .method("POST",body)
-                .header("token", token)
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

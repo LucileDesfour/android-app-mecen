@@ -60,7 +60,7 @@ public class ProjectAdapter  extends RecyclerView.Adapter<ProjectAdapter.Project
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ProjectViewHolder holder, int position) {
+    public void onBindViewHolder(ProjectViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Projects.Project proj = projects.get(position);

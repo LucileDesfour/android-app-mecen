@@ -1,5 +1,6 @@
 package ca.ulaval.ima.mecenapp.models.network;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -20,13 +21,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class OrgaNetwork {
-    public static void getOrga(String orgaId, String project_id, ShowProject sproject) {
+    public static void getOrga(String orgaId, String project_id, final ShowProject sproject) {
         final Orgas.Orga[] orga = {null};
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/orgas/" + orgaId)
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -61,7 +62,7 @@ public class OrgaNetwork {
 
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/orgas")
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
 
@@ -99,7 +100,7 @@ public class OrgaNetwork {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/orgas/"+orgaId+"/members")
-                .header("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhMGMwNzgyMS05MWYyLTQyZTctODYzOS04Nzg3ZjdkMmZkYzUiLCJpYXQiOjE1NTQxNTI3NzQsImV4cCI6MTU1NDIzOTE3NH0.n47zH3SNHgTrQw6cdaSdvFgGfH2m2_ZRM-Y21ok-6LQ")
+                .header("token", Users.currentUser.getToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
 

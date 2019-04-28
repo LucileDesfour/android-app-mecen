@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class Users {
     public static ArrayList<User> users_list = new ArrayList<>();
 
+
+    public static User currentUser;
+
     public static class User {
         private String id;
         private String email;
         private String password;
         private String firstName;
         private String lastName;
+        private String token;
 
-        public User(String id, String email, String password, String firstName, String lastName) {
-            this.id = id;
-            this.email = email;
-            this.password = password;
-            this.firstName = firstName;
-            this.lastName = lastName;
+        public User(String token) {
+            this.token = token;
         }
 
         public User(String id, String email, String firstName, String lastName) {
@@ -67,8 +67,13 @@ public class Users {
             this.lastName = lastName;
         }
 
+        public String getToken() { return token; }
+
+        public void setToken(String token) { this.token = token; }
+
         public String getUserInitial(){
             return firstName.substring(0,1).toUpperCase() + "." + lastName;
         }
     }
+
 }

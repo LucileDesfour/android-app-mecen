@@ -59,7 +59,7 @@ public class Login extends Fragment {
             mListener = (OnLoginInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnProjectInteractionListener");
+                    + " must implement OnLoginInteractionListener");
         }
     }
     public void closeFragment() {

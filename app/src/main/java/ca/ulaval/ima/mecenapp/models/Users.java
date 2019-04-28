@@ -14,7 +14,6 @@ public class Users {
         private String password;
         private String firstName;
         private String lastName;
-        private String imageUrl;
         private String token;
 
         public User(String token) {
@@ -71,14 +70,6 @@ public class Users {
         public String getToken() { return token; }
 
         public void setToken(String token) { this.token = token; }
-
-        public String getImageUrl() {
-            return imageUrl;
-        }
-
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
 
         public String getUserInitial(){
             return firstName.substring(0,1).toUpperCase() + "." + lastName;

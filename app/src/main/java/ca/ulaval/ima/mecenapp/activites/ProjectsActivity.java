@@ -1,31 +1,22 @@
 package ca.ulaval.ima.mecenapp.activites;
 
-import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-
-import java.util.ArrayList;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.fragments.Login;
 import ca.ulaval.ima.mecenapp.fragments.SearchProject;
 import ca.ulaval.ima.mecenapp.fragments.ShowProject;
 import ca.ulaval.ima.mecenapp.models.Projects;
-import ca.ulaval.ima.mecenapp.models.network.ProjectNetwork;
-import android.app.SearchManager;
-import android.widget.SearchView;
+import ca.ulaval.ima.mecenapp.models.Users;
+
 public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener, Login.OnLoginInteractionListener {
 
 
@@ -42,7 +33,8 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         if (sharedPref.contains("token")) {
-            Log.e("Token :", sharedPref.getString("token", null));
+            //Log.e("Token :", sharedPref.getString("token", null));
+            Users.currentUser = new Users.User(sharedPref.getString("token", null));
             SearchProject fragment_search = new SearchProject();
             fragmentTransaction.add(R.id.container, fragment_search, "SEARCH");
             fragmentTransaction.commit();
@@ -74,5 +66,10 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         fragmentTransaction.replace(R.id.container, fragment_search, "SEARCH");
         fragmentTransaction.commit();
     }
+    public void StartChatActivity() {
+        Intent intent = new Intent(ProjectsActivity.this,ChatActivity.class);
+        startActivity(intent);
+    }
+
 }
 

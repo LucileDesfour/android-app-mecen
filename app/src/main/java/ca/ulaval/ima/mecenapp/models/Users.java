@@ -1,6 +1,9 @@
 package ca.ulaval.ima.mecenapp.models;
 
+import java.util.ArrayList;
+
 public class Users {
+    public static ArrayList<User> users_list = new ArrayList<>();
 
 
     public static User currentUser;
@@ -16,6 +19,13 @@ public class Users {
 
         public User(String token) {
             this.token = token;
+        }
+
+        public User(String id, String email, String firstName, String lastName) {
+            this.id = id;
+            this.email = email;
+            this.firstName = firstName;
+            this.lastName = lastName;
         }
 
         public String getId() {
@@ -70,6 +80,9 @@ public class Users {
             this.imageUrl = imageUrl;
         }
 
+        public String getUserInitial(){
+            return firstName.substring(0,1).toUpperCase() + "." + lastName;
+        }
     }
 
 }

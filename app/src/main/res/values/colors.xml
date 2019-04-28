@@ -7,4 +7,5 @@
     <color name="secondaryColorLight">#02e002</color>
     <color name="colorAccent">#AF550B</color>
     <color name="colorAccentLight">#F09022</color>
+    <color name="lightGrey">#E4E4E4</color>
 </resources>

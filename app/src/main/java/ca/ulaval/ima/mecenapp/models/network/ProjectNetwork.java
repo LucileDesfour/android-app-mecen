@@ -26,8 +26,6 @@ public class ProjectNetwork  {
     static public void getProject(ShowProject sproject, String project_id) {
         OkHttpClient client = new OkHttpClient();
 
-        Log.d("Token :", project_id);
-
         Request request = new Request.Builder()
                 .url("https://mecenapp-api-dev.herokuapp.com/api/projects/" + project_id)
                 .header("token", sproject.getActivity().getPreferences(Context.MODE_PRIVATE).getString("token", null))
@@ -44,13 +42,13 @@ public class ProjectNetwork  {
 
 
                 final String myResponse = response.body().string();
-                Log.d("Reponse", myResponse);
+                
                 JSONObject Jobject = null;
                 try {
                     Jobject = new JSONObject(myResponse);
                     JSONObject object = Jobject.getJSONObject("project");
                     JSONObject data = object.getJSONObject("data");
-                    Log.d("Data :", data.toString());
+                    
                     ArrayList<String> ressources = new ArrayList<String>();
                     JSONArray jsonArray_resources = data.getJSONArray("resources");
                     if (jsonArray_resources != null) {
@@ -58,7 +56,7 @@ public class ProjectNetwork  {
                             ressources.add(jsonArray_resources.get(idx_ressources).toString());
                         }
                     }
-                    Log.d("ressources ", String.valueOf(ressources));
+                    
 
                     ArrayList<String> domains = new ArrayList<String>();
                     JSONArray jsonArray_domains = data.getJSONArray("domains");
@@ -67,7 +65,7 @@ public class ProjectNetwork  {
                             domains.add(jsonArray_domains.get(idx_domains).toString());
                         }
                     }
-                    Log.d("domains", String.valueOf(domains));
+                    
                     Projects.currentProject = new Projects.Project(object.get("id").toString(),
                                 object.get("title").toString(),
                                 object.get("isPublic").toString(),
@@ -103,7 +101,7 @@ public class ProjectNetwork  {
             public void onResponse(Call call, Response response) throws IOException {
 
                 final String myResponse = response.body().string();
-                Log.d("Reponse", myResponse);
+                
                 JSONObject Jobject = null;
                 try {
                     Jobject = new JSONObject(myResponse);
@@ -119,7 +117,7 @@ public class ProjectNetwork  {
                                 ressources.add(jsonArray_resources.get(idx_ressources).toString());
                             }
                         }
-                        Log.d("ressources ", String.valueOf(ressources));
+                        
 
                         ArrayList<String> domains = new ArrayList<String>();
                         JSONArray jsonArray_domains = data.getJSONArray("domains");
@@ -128,8 +126,8 @@ public class ProjectNetwork  {
                                 domains.add(jsonArray_domains.get(idx_domains).toString());
                             }
                         }
-                        Log.d("domains", String.valueOf(domains));
-                        Log.d("Proj :", data.toString());
+                        
+                        
                         Projects.project_list.add(new Projects.Project(object.get("id").toString(),
                                 object.get("title").toString(),
                                 object.get("isPublic").toString(),

@@ -54,7 +54,6 @@ public class UserNetwork {
 
                     try {
                         String token =myjsonObject.getString("token");
-                        Users.currentUser=new Users.User(token);
                         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("token", token);

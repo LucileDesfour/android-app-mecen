@@ -56,7 +56,6 @@ public class ChatRooms extends Fragment {
         String newTitle = getContext().getString(R.string.my_chats) + " [Chargement]";
         title.setText(newTitle);
 
-        RoomsNetwork.getRooms(this);
         return v;
     }
 

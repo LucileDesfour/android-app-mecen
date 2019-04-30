@@ -2,8 +2,10 @@ package ca.ulaval.ima.mecenapp.fragments;
 
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.Fragment;
@@ -98,14 +100,21 @@ public class SendMessages extends Fragment {
         button_micro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String DIALOG_TEXT = "Dictez votre text";
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, DIALOG_TEXT);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, REQUEST_CODE);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr-FR");
-                startActivityForResult(intent, REQUEST_CODE);
+                try {
+                    String DIALOG_TEXT = "Dictez votre text";
+                    Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, DIALOG_TEXT);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                    intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, REQUEST_CODE);
+                    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "fr-FR");
+                    startActivityForResult(intent, REQUEST_CODE);
+                } catch(ActivityNotFoundException e)
+                {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://market.android.com/details?id=com.google.android.googlequicksearchbox"));
+                    startActivity(browserIntent);
+
+                }
             }
         });
 

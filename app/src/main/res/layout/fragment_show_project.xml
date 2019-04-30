@@ -12,15 +12,19 @@
 
         <TextView
             android:id="@+id/project_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
-            android:text="Nom"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/name"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/project_orga" />
 
@@ -31,7 +35,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="44dp"
             android:layout_marginRight="44dp"
-            android:text="Organisation"
+            android:text="@string/organisation"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +51,7 @@
             android:layout_marginRight="16dp"
             android:lines="4"
             android:maxLines="10"
-            android:text="Description"
+            android:text="@string/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/project_name" />
@@ -70,7 +74,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
-            android:text="Domaines d'activités"
+            android:text="@string/activities_domains"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/project_description" />
 
@@ -81,7 +85,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="42dp"
-            android:text="Ressouces demandées"
+            android:text="@string/asked_ressources"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/project_domains" />
 
@@ -110,7 +114,7 @@
             app:backgroundTint="@color/colorPrimary"
             app:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 

@@ -13,4 +13,10 @@
     <string name="add_user">Ajouter</string>
     <string name="del_user">Retirer</string>
     <string name="my_chats">Mes conversations</string>
+    <string name="asked_ressources">Ressouces demandées</string>
+    <string name="activities_domains">Domaines d\'activités</string>
+    <string name="description">Description</string>
+    <string name="organisation">Organisation</string>
+    <string name="name">Nom</string>
+    <string name="enter_msg">Saisir un message</string>
 </resources>

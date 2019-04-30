@@ -1,69 +1,55 @@
 package ca.ulaval.ima.mecenapp.activites;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import ca.ulaval.ima.mecenapp.R;
-import ca.ulaval.ima.mecenapp.adapters.MessageListAdapter;
+import ca.ulaval.ima.mecenapp.fragments.SendMessages;
 
-import static android.provider.UserDictionary.Words.APP_ID;
+public class MessageListActivity extends AppCompatActivity implements SendMessages.OnMessageInteractionListener {
 
-public class MessageListActivity extends AppCompatActivity {
 
-    private RecyclerView mMessageRecycler;
-    private MessageListAdapter mMessageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_list);
 
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-        /*SendBird.connect(USER_ID, new SendBird.ConnectHandler() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Intent intent = getIntent();
+        Bundle bundle = new Bundle();
+        if (intent.getStringExtra("manager_id") != null) {
+            String Id = intent.getStringExtra("manager_id");
+            bundle.putString("manager_id", Id);
+        } else if (intent.getStringExtra("room_id") != null) {
+            String Id = intent.getStringExtra("room_id");
+            bundle.putString("room_id", Id);
+        }
+        SendMessages fragment_send = new SendMessages();
+        fragment_send.setArguments(bundle);
+        fragmentTransaction.add(R.id.container, fragment_send, "SEND");
+        fragmentTransaction.commit();
+    }
+
+    public void SetConversationName(String name) {
+        runOnUiThread(new Runnable() {
             @Override
-            public void onConnected(User user, SendBirdException e) {
-
+            public void run() {
+                getSupportActionBar().setTitle(name);
             }
         });
+    }
 
-        OpenChannel.createChannel(new OpenChannel.OpenChannelCreateHandler() {
-            @Override
-            public void onResult(OpenChannel openChannel, SendBirdException e) {
-                if (e != null) {    // Error.
-                    return;
-                }
-            }
-        });
-
-        OpenChannel.getChannel(CHANNEL_URL, new OpenChannel.OpenChannelGetHandler() {
-            @Override
-            public void onResult(OpenChannel openChannel, SendBirdException e) {
-                if (e != null) {    // Error.
-                    return;
-                }
-
-                openChannel.enter(new OpenChannel.OpenChannelEnterHandler() {
-                    @Override
-                    public void onResult(SendBirdException e) {
-                        if (e != null) {    // Error.
-                            return;
-                        }
-                    }
-                });
-            }
-        });
-
-        channel.sendUserMessage(MESSAGE, new BaseChannel.SendUserMessageHandler() {
-            @Override
-            public void onSent(UserMessage userMessage, SendBirdException e) {
-                if (e != null) {    // Error.
-                    return;
-                }
-            }
-        });*/
-        mMessageRecycler = (RecyclerView) findViewById(R.id.recyclerview_message_list);
-        mMessageRecycler.setLayoutManager(new LinearLayoutManager(this));
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

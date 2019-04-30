@@ -1,23 +1,20 @@
 package ca.ulaval.ima.mecenapp.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Messages {
 
     public static ArrayList<Message> messages_list = new ArrayList<>();
 
-    public class Message {
+    public static class Message {
         private String id;
         private String content;
         private Users.User user;
-        private String createdDate;
 
-        public Message(String id, String content, Users.User user, String createdDate) {
+        public Message(String id, String content, Users.User user) {
             this.id = id;
             this.content = content;
             this.user = user;
-            this.createdDate = createdDate;
         }
 
         public String getId() {
@@ -44,12 +41,5 @@ public class Messages {
             this.user = user;
         }
 
-        public String getCreatedDate() {
-            return createdDate;
-        }
-
-        public void setCreatedDate(String createdDate) {
-            this.createdDate = createdDate;
-        }
     }
 }

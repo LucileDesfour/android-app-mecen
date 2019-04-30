@@ -1,11 +1,6 @@
 package ca.ulaval.ima.mecenapp.models;
 
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Date;
-
-import ca.ulaval.ima.mecenapp.models.network.OrgaNetwork;
 
 public class Projects {
 
@@ -18,10 +13,11 @@ public class Projects {
         private boolean isPulic;
         private Orgas.Orga orga;
         private String description;
+        private String managerId;
         private ArrayList<String> ressources;
         private ArrayList<String> domaine;
 
-        public Project(String id_param, String name_params, String isPublic_params, String description_params, ArrayList<String> ressources_params, ArrayList<String> domains_params) {
+        public Project(String id_param, String name_params, String isPublic_params, String description_params, ArrayList<String> ressources_params, ArrayList<String> domains_params, String manager_params) {
             this.id = id_param;
             this.name = name_params;
             if (isPublic_params.equals("true")) {
@@ -33,6 +29,7 @@ public class Projects {
             this.description = description_params;
             this.ressources = ressources_params;
             this.domaine = domains_params;
+            this.managerId = manager_params;
         }
 
         public String getId() {
@@ -89,6 +86,14 @@ public class Projects {
 
         public void setDomaine(ArrayList<String> domaine) {
             this.domaine = domaine;
+        }
+
+        public String getManagerId() {
+            return managerId;
+        }
+
+        public void setManagerId(String managerId) {
+            this.managerId = managerId;
         }
     }
 }

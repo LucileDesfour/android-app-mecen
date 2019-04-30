@@ -27,6 +27,14 @@ public class Users {
             this.lastName = lastName;
         }
 
+        public User(String id, String email, String firstName, String lastName, String token) {
+            this.id = id;
+            this.email = email;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.token = token;
+        }
+
         public String getId() {
             return id;
         }

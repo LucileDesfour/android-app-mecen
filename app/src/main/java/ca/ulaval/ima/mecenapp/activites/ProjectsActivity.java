@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.fragments.Login;
@@ -16,8 +15,9 @@ import ca.ulaval.ima.mecenapp.fragments.SearchProject;
 import ca.ulaval.ima.mecenapp.fragments.ShowProject;
 import ca.ulaval.ima.mecenapp.models.Projects;
 import ca.ulaval.ima.mecenapp.models.Users;
+import ca.ulaval.ima.mecenapp.models.network.UserNetwork;
 
-public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener, Login.OnLoginInteractionListener {
+public class ProjectsActivity extends AppCompatActivity implements SearchProject.OnProjectInteractionListener, Login.OnLoginInteractionListener, ShowProject.OnShowProjectInteractionListener {
 
 
     @Override
@@ -33,8 +33,8 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         if (sharedPref.contains("token")) {
-            //Log.e("Token :", sharedPref.getString("token", null));
             Users.currentUser = new Users.User(sharedPref.getString("token", null));
+            UserNetwork.getCurrentUser(this);
             SearchProject fragment_search = new SearchProject();
             fragmentTransaction.add(R.id.container, fragment_search, "SEARCH");
             fragmentTransaction.commit();
@@ -46,7 +46,6 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
     }
 
     public void OnProjectInteractionListener(Projects.Project projet) {
-        Log.d("Activity", projet.getName());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ShowProject show_project = new ShowProject();
@@ -63,11 +62,23 @@ public class ProjectsActivity extends AppCompatActivity implements SearchProject
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         SearchProject fragment_search = new SearchProject();
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+        Users.currentUser = new Users.User(sharedPref.getString("token", null));
+        UserNetwork.getCurrentUser(this);
         fragmentTransaction.replace(R.id.container, fragment_search, "SEARCH");
         fragmentTransaction.commit();
     }
     public void StartChatActivity() {
         Intent intent = new Intent(ProjectsActivity.this,ChatActivity.class);
+        startActivity(intent);
+    }
+
+    public void StartMessagesActivity(String manager_id) {
+        Intent intent = new Intent(ProjectsActivity.this,MessageListActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("manager_id", manager_id);
+        intent.putExtras(mBundle);
         startActivity(intent);
     }
 

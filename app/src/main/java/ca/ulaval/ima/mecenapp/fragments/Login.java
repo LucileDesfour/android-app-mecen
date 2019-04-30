@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import ca.ulaval.ima.mecenapp.R;
-import ca.ulaval.ima.mecenapp.models.Projects;
 import ca.ulaval.ima.mecenapp.models.network.UserNetwork;
 
 

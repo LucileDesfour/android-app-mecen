@@ -21,8 +21,8 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
     private Context mContext;
     private ArrayList<Rooms.Room> mRooms;
 
-    public ChatRoomAdapter(Context mContext, ArrayList<Rooms.Room> rooms) {
-        this.listener = (ChatRooms.ChatRoomsListener) mContext;
+    public ChatRoomAdapter(Context mContext, ArrayList<Rooms.Room> rooms, ChatRooms.ChatRoomsListener mlistner) {
+        this.listener = mlistner;
         this.mContext = mContext;
         this.mRooms = rooms;
     }
@@ -30,9 +30,11 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
     static class ChatRoomsViewHolder extends RecyclerView.ViewHolder{
         private ConstraintLayout item;
         private TextView room_name;
+        public final View mView;
 
         ChatRoomsViewHolder(View itemView){
             super(itemView);
+            mView = itemView;
             item = itemView.findViewById(R.id.room_item);
             room_name = itemView.findViewById(R.id.room_name);
         }
@@ -43,13 +45,22 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
     public ChatRoomAdapter.ChatRoomsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.room_item, parent, false);
         final ChatRoomsViewHolder vHolder = new ChatRoomsViewHolder(v);
-        vHolder.item.setOnClickListener(view -> listener.onItemSelect());
         return vHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatRoomsViewHolder holder, int position) {
         holder.room_name.setText(mRooms.get(position).getMembersInitials());
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != listener && mRooms.size() > 0 && mRooms.get(position) != null) {
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                    listener.onItemSelect(mRooms.get(position).id);
+                }
+            }
+        });
     }
 
     @Override

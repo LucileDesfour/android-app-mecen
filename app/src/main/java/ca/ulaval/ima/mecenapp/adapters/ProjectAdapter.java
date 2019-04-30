@@ -1,13 +1,9 @@
 package ca.ulaval.ima.mecenapp.adapters;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,8 +11,6 @@ import java.util.ArrayList;
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.fragments.SearchProject;
 import ca.ulaval.ima.mecenapp.models.Projects;
-
-import static android.os.Build.VERSION_CODES.O;
 
 public class ProjectAdapter  extends RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder> {
     private ArrayList<Projects.Project> projects;
@@ -26,11 +20,9 @@ public class ProjectAdapter  extends RecyclerView.Adapter<ProjectAdapter.Project
         private final TextView project_name;
         private final TextView project_orga;
         public final View mView;
-        private SearchProject.OnProjectInteractionListener listener;
 
 
         // each data item is just a string in this case
-        public View project;
         public ProjectViewHolder(View v) {
             super(v);
             mView = v;

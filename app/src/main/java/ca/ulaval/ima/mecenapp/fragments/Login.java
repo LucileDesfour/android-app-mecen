@@ -44,7 +44,13 @@ public class Login extends Fragment {
             @Override
             public void onClick(View view) {
                 UserNetwork.getToken(editTextEmail.getText().toString(),editTextPassword.getText().toString(), getActivity(), login);
-
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        buttonLogin.setEnabled(false);
+                        buttonLogin.setText(R.string.loading);
+                    }
+                });
             }
         });
 
@@ -63,6 +69,16 @@ public class Login extends Fragment {
     }
     public void closeFragment() {
         mListener.OnLoginInteractionListener();
+    }
+
+    public void nothinghappened(){
+        this.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                buttonLogin.setEnabled(true);
+                buttonLogin.setText(R.string.login);
+            }
+        });
     }
 
     public interface OnLoginInteractionListener {

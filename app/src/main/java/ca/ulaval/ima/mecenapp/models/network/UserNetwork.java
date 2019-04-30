@@ -64,8 +64,8 @@ public class UserNetwork {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
+                } else {
+                    login.nothinghappened();
                 }
 
             }

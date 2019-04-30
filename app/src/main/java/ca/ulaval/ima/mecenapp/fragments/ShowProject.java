@@ -2,14 +2,10 @@ package ca.ulaval.ima.mecenapp.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -37,6 +31,8 @@ public class ShowProject extends Fragment {
     //private OnFragmentInteractionListener mListener;
     View view;
     Projects.Project projet;
+    private OnShowProjectInteractionListener mListener;
+
 
     public ShowProject() {
         // Required empty public constructor
@@ -53,7 +49,6 @@ public class ShowProject extends Fragment {
 
     public void ChangeData() {
         this.projet = Projects.currentProject;
-        Log.d("Domain size :", String.valueOf(Projects.currentProject.getDomaine().size()));
         ArrayList<TextView> domains = new ArrayList<>();
         for (int idx_domains = 0; idx_domains < Projects.currentProject.getDomaine().size(); idx_domains++) {
             domains.add(new TextView(this.getContext()));
@@ -157,31 +152,31 @@ public class ShowProject extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_show_project, container, false);
         this.view = v;
+        FloatingActionButton fab = view.findViewById(R.id.create_conversation_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String manager_id = Projects.currentProject.getManagerId();
+                mListener.StartMessagesActivity(manager_id);
+            }
+        });
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        /*if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }*/
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnShowProjectInteractionListener) {
+            mListener = (OnShowProjectInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }*/
+                    + " must implement OnShowProjectInteractionListener");
+        }
     }
-
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
     /**
@@ -194,8 +189,9 @@ public class ShowProject extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    /*public interface OnFragmentInteractionListener {
+
+    public interface OnShowProjectInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
+        void StartMessagesActivity(String managerid);
+    }
 }

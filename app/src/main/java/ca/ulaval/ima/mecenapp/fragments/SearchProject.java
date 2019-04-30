@@ -1,23 +1,18 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
-import android.app.SearchManager;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import java.util.ArrayList;
-import android.app.SearchManager;
-import android.widget.SearchView;
+
 import ca.ulaval.ima.mecenapp.R;
 import ca.ulaval.ima.mecenapp.adapters.ProjectAdapter;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -70,6 +65,7 @@ public class SearchProject extends Fragment {
         this.recyclerView.setLayoutManager(this.layoutManager);
         this.mAdapter = new ProjectAdapter(Projects.project_list, this.mListener);
         recyclerView.setAdapter(this.mAdapter);
+
 
         FloatingActionButton fab = view.findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -127,15 +123,12 @@ public class SearchProject extends Fragment {
         for (Projects.Project project : Projects.project_list) {
             if (project.getName().toLowerCase().contains(query.toLowerCase())) {
                 result.add(project);
-                Log.d("Result", project.getName());
             }
         }
-        Log.d("Query", query);
         mAdapter.setItems(result);
         mAdapter.notifyDataSetChanged();
     }
     public void ChangeData() {
-        Log.d("Projects", String.valueOf(Projects.project_list.size()));
         mAdapter.setItems(Projects.project_list);
         this.getActivity().runOnUiThread(new Runnable() {
             @Override

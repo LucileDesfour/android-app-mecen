@@ -16,22 +16,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text="Nom"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/project_orga" />
 
         <TextView
             android:id="@+id/project_orga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginRight="44dp"
             android:text="Organisation"
             android:textColor="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +99,7 @@
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton4"
+            android:id="@+id/create_conversation_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

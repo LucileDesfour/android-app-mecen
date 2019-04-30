@@ -8,9 +8,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-import ca.ulaval.ima.mecenapp.R;
+import ca.ulaval.ima.mecenapp.activites.ProjectsActivity;
 import ca.ulaval.ima.mecenapp.fragments.Login;
+import ca.ulaval.ima.mecenapp.fragments.SendMessages;
 import ca.ulaval.ima.mecenapp.models.Users;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -70,5 +72,82 @@ public class UserNetwork {
         });
 
 
+    }
+
+    public static void getCurrentUser(ProjectsActivity projectsActivity) {
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url("https://mecenapp-api-dev.herokuapp.com/api/users/me")
+                .header("token", Users.currentUser.getToken())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myjsonObject= null;
+                    try {
+                        myjsonObject = new JSONObject(myResponse);
+                        JSONObject userObject = myjsonObject.getJSONObject("user");
+                        Users.currentUser = new Users.User(userObject.get("id").toString(),
+                                userObject.get("email").toString(),
+                                userObject.getJSONObject("profile").get("firstName").toString(),
+                                userObject.getJSONObject("profile").get("lastName").toString(),
+                                Users.currentUser.getToken());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    public static void getUser(String user_id, SendMessages sendMessages) {
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url("https://mecenapp-api-dev.herokuapp.com/api/users/" + user_id)
+                .header("token", Users.currentUser.getToken())
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                if (response.isSuccessful()){
+                    final String myResponse = response.body().string();
+                    JSONObject myjsonObject= null;
+                    try {
+                        myjsonObject = new JSONObject(myResponse);
+                        JSONObject userObject = myjsonObject.getJSONObject("user");
+                        Users.User user = new Users.User(user_id,
+                                userObject.get("email").toString(),
+                                userObject.getJSONObject("profile").get("firstName").toString(),
+                                userObject.getJSONObject("profile").get("lastName").toString());
+                        ArrayList<Users.User> users = new ArrayList<>();
+                        users.add(user);
+                        RoomsNetwork.postRooms(users, sendMessages);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 }

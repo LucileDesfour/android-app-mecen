@@ -10,13 +10,12 @@ public class Rooms {
         rooms = new ArrayList<>();
     }
 
-
     public static class Room {
         public String id;
         public ArrayList<Users.User> members;
         public Users.User manager;
         public String name ="";
-
+        private ArrayList<Messages.Message> messages;
         public Room() {
         }
 
@@ -75,6 +74,14 @@ public class Rooms {
                 }
                 return membersInitials;
             }
+        }
+
+        public ArrayList<Messages.Message> getMessages() {
+            return messages;
+        }
+
+        public void setMessages(ArrayList<Messages.Message> messages) {
+            this.messages = messages;
         }
     }
 }

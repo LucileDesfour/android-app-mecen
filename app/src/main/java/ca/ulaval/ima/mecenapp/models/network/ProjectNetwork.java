@@ -1,8 +1,6 @@
 package ca.ulaval.ima.mecenapp.models.network;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +9,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ca.ulaval.ima.mecenapp.adapters.ProjectAdapter;
 import ca.ulaval.ima.mecenapp.fragments.SearchProject;
 import ca.ulaval.ima.mecenapp.fragments.ShowProject;
 import ca.ulaval.ima.mecenapp.models.Projects;
@@ -65,13 +62,14 @@ public class ProjectNetwork  {
                             domains.add(jsonArray_domains.get(idx_domains).toString());
                         }
                     }
-                    
+
                     Projects.currentProject = new Projects.Project(object.get("id").toString(),
                                 object.get("title").toString(),
                                 object.get("isPublic").toString(),
                                 data.get("description").toString(),
                                 ressources,
-                                domains);
+                                domains,
+                                object.get("managerId").toString());
                     OrgaNetwork.getOrga(object.get("orgaId").toString(), object.get("id").toString(), sproject);
 
                 } catch (JSONException e) {
@@ -133,7 +131,8 @@ public class ProjectNetwork  {
                                 object.get("isPublic").toString(),
                                 data.get("description").toString(),
                                 ressources,
-                                domains));
+                                domains,
+                                object.get("managerId").toString()));
 
                     }
                 } catch (JSONException e) {

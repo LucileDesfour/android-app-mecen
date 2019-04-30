@@ -1,5 +1,6 @@
 package ca.ulaval.ima.mecenapp.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +32,7 @@ public class ChatRooms extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_chat_rooms, container, false);
@@ -48,7 +50,7 @@ public class ChatRooms extends Fragment {
         this.recyclerView = v.findViewById(R.id.rooms_recycler_view);
         this.layoutManager = new LinearLayoutManager(getActivity());
         this.recyclerView.setLayoutManager(this.layoutManager);
-        this.mAdapter = new ChatRoomAdapter(getContext(), Rooms.rooms);
+        this.mAdapter = new ChatRoomAdapter(getContext(), Rooms.rooms, this.mListener);
         this.recyclerView.setAdapter(this.mAdapter);
 
         String newTitle = getContext().getString(R.string.my_chats) + " [Chargement]";
@@ -59,6 +61,11 @@ public class ChatRooms extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        RoomsNetwork.getRooms(this);
+    }
 
 
     @Override
@@ -82,18 +89,25 @@ public class ChatRooms extends Fragment {
 
     public void updateAdapter(){
         mAdapter.setItems(Rooms.rooms);
-        String newTitle = getResources().getString(R.string.my_chats) + " ["+ Rooms.rooms.size() +"]";
-        this.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                title.setText(newTitle);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
+        String newTitle = "";
+        if (isAdded()){
+            newTitle = getResources().getString(R.string.my_chats) + " [" + Rooms.rooms.size() + "]";
+        }
+        Activity activity = getActivity();
+        if (isAdded() && activity != null) {
+            String finalNewTitle = newTitle;
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    title.setText(finalNewTitle);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     public interface ChatRoomsListener {
-        void onItemSelect();
+        void onItemSelect(String id);
         void startCreateChatRoom();
     }
 

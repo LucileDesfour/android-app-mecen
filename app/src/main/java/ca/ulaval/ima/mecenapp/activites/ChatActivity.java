@@ -1,5 +1,6 @@
 package ca.ulaval.ima.mecenapp.activites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -32,11 +33,15 @@ public class ChatActivity extends AppCompatActivity implements ChatRooms.ChatRoo
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onItemSelect() {
-        //launch chat fragment
-    }
 
+    @Override
+    public void onItemSelect(String id) {
+        Intent intent = new Intent(ChatActivity.this,MessageListActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putString("room_id", id);
+        intent.putExtras(mBundle);
+        startActivity(intent);
+    }
 
     @Override
     public void startCreateChatRoom() {
